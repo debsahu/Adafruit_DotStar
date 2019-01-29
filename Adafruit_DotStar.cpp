@@ -108,8 +108,8 @@ void Adafruit_DotStar::hw_spi_init(void) { // Initialize hardware SPI
  #if defined(__AVR__) || defined(CORE_TEENSY) || defined(__ARDUINO_ARC__) || defined(__ARDUINO_X86__)
   SPI.setClockDivider(SPI_CLOCK_DIV2); // 8 MHz (6 MHz on Pro Trinket 3V)
  #else
-  #ifdef ESP8266
-    SPI.setFrequency(8000000L);
+  #if defined(ESP8266) || defined(ESP31B) || defined(ESP32)
+    SPI.setFrequency(4000000L);
   #elif defined(PIC32)
     // Use begin/end transaction to set SPI clock rate
     SPI.beginTransaction(SPISettings(8000000, MSBFIRST, SPI_MODE0));
